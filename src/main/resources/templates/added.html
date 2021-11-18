@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddedDrind</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.6.0/css/bootstrap.css">
+</head>
+<body>
+<p class="h3"> Added drink is: </p>
+<p>Drink with name: "<span class="badge bg-light text-dark"
+                         th:text="${name}"></span>
+    <span>" and brand: "</span>
+    <span class="badge bg-light text-dark"
+          th:text="${brand}"></span>
+    <span>" and price: "</span>
+    <span class="badge bg-light text-dark"
+          th:text="${price}"></span>
+    <span>" and quantity: "</span>
+    <span class="badge bg-light text-dark"
+          th:text="${quantity}"></span>
+    <span>" and typ: "</span>
+    <span class="badge bg-light text-dark"
+          th:text="${typ}"></span>
+    " added successfuly!
+</p>
+
+<a class="btn btn-secondary" aria-current="page" href="/" role="button">Return to main page</a>
+</body>
+</html>

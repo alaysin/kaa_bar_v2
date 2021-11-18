@@ -11,6 +11,9 @@ public interface DrinksRepo extends JpaRepository<Drink, Integer> {
     @Query(name ="findByBrand")
     public List<Drink> findByBrand(String brand);
 
+    @Query(name = "existsById")
+    public List<Drink> existsById(int id);
+
     @Query(name ="findByBrandAndAndTyp")
     public List<Drink> findByBrandAndAndTyp(String brand, String typ);
 

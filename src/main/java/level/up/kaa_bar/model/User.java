@@ -45,9 +45,10 @@ public class User {
     @Setter
     private String last_name;
 
+
+    @Column (name = "to_delete")
     @Getter
     @Setter
-    @Column (name = "to_delete")
     private boolean toDelete;
     /*
         @OneToMany(mappedBy = "manager")
@@ -59,6 +60,7 @@ public class User {
         this.isAdmin = isAdmin;
         this.name = name;
         this.last_name = last_name;
+        this.toDelete = false;
     }
 
     public User(String login, String password, String name, String last_name) {
@@ -66,6 +68,8 @@ public class User {
         this.password = password;
         this.name = name;
         this.last_name = last_name;
+        this.toDelete = false;
+        this.isAdmin = false;
     }
 
     public User() {

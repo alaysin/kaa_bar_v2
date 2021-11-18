@@ -44,15 +44,14 @@
                 <a class="nav-link" aria-current="page" href="/users">Users</a>
             </li>
         </ul>
-
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/add">Add new Drink</a>
+        </li>
     </div>
 </div>
 
 <div class="container">
     <div class="row" style="padding-top: 10px">
-                <div class="col-md-6">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addDrink">Добавить</button>
-                </div>
         <div class="col-md-6" style="text-align: right">
             <form class="form-inline float-right">
                 <div class="form-group">
@@ -97,55 +96,55 @@
         </nav>
     </div>
 </div>
-<div class="modal fade" id="addDrink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Drink</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label">Drink name</label>
-                        <div class="col-md-8">
-                            <input name="name" class="form-control" id="name" placeholder="name">
-                        </div>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="brand" class="col-md-4 col-form-label">brand</label>
-                        <div class="col-md-8">
-                            <input name="brand" class="form-control" id="brand" placeholder="brand">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="price" class="col-md-4 col-form-label">price</label>
-                        <div class="col-md-8">
-                            <input name="price" type="number" class="form-control" id="price" placeholder="price">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="quantity" class="col-md-4 col-form-label">quantity</label>
-                        <div class="col-md-8">
-                            <input name="quantity" type="number" class="form-control" id="quantity" placeholder="quantity">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="typ" class="col-md-4 col-form-label">typ</label>
-                        <div class="col-md-8">
-                            <input name="typ" class="form-control" id="typ" placeholder="typ">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="saveDrink" type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade" id="addDrink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">New Drink</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form>-->
+<!--                    <div class="form-group row">-->
+<!--                        <label for="name" class="col-md-4 col-form-label">Drink name</label>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input name="name" class="form-control" id="name" placeholder="name">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group row" >-->
+<!--                        <label for="brand" class="col-md-4 col-form-label">brand</label>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input name="brand" class="form-control" id="brand" placeholder="brand">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group row">-->
+<!--                        <label for="price" class="col-md-4 col-form-label">price</label>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input name="price" type="number" class="form-control" id="price" placeholder="price">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group row">-->
+<!--                        <label for="quantity" class="col-md-4 col-form-label">quantity</label>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input name="quantity" type="number" class="form-control" id="quantity" placeholder="quantity">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group row">-->
+<!--                        <label for="typ" class="col-md-4 col-form-label">typ</label>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <input name="typ" class="form-control" id="typ" placeholder="typ">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                <button id="saveDrink" type="button" class="btn btn-primary">Save changes</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 </body>
 </html>

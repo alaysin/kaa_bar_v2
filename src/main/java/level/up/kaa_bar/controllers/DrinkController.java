@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.StringUtils.hasText;
@@ -71,19 +73,24 @@ public class DrinkController  {
 
         return "OK";
     }
-/*
-    @GetMapping("/drinks/{id}/modify")
-    public ModelAndView modify(@PathVariable int id) {
-        if (drinksRepo.findById(id).isPresent()) {
-            Drink drinks = drinksRepo.findById(id).get();
-            drinks.se();
-            petsDAO.save(pets);
-            return new ModelAndView("redirect:/");
-        } else {
-            return new ModelAndView("redirect:/error");
-        }
 
 
-    }
-    */
+//    @GetMapping("/drinks/{id}/modify")
+//    public ModelAndView modify(@PathVariable(value = "id") int id, Model model) {
+//        Option<Drink> drink = drinksRepo.findById(id);
+//        ArrayList<Drink> res = new ArrayList<>();
+//
+//
+//        if (drinksRepo.findById(id).isPresent()) {
+//            Drink drinks = drinksRepo.findById(id).get();
+//            drinks.se();
+//            petsDAO.save(pets);
+//            return new ModelAndView("redirect:/");
+//        } else {
+//            return new ModelAndView("redirect:/error");
+//        }
+//
+//
+//    }
+
 }
