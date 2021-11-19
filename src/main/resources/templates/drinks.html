@@ -3,31 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
-<!--    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.6.0/css/bootstrap.css">-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.6.0/css/bootstrap.css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#addDrink').submit(function(e) {
+        $(document).ready(function () {
+            $('#addDrink').submit(function (e) {
                 e.preventDefault();
 
                 $.ajax({
                     url: '/drinks',
                     method: 'POST',
                     data: $('#addDrink form').serialize()
-                }).done(function() {
+                }).done(function () {
                     $('#addDrink').modal('toggle')
                     location.href = location.href;
-                }).fail(function() { alert('something went wrong')})
+                }).fail(function () {
+                    alert('something went wrong')
+                })
 
             })
 
-            $('#saveDrink').click(function(e) {
+            $('#saveDrink').click(function (e) {
                 $('#addDrink').submit();
             })
         })
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -44,9 +49,7 @@
                 <a class="nav-link" aria-current="page" href="/users">Users</a>
             </li>
         </ul>
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/add">Add new Drink</a>
-        </li>
+
     </div>
 </div>
 
@@ -56,8 +59,9 @@
             <form class="form-inline float-right">
                 <div class="form-group">
                     <input name="q" th:value="${query}" class="form-control mb-2" placeholder="Search">
+                    <button type="submit" class="btn btn-primary mb-2">Найти</button>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Найти</button>
+
             </form>
         </div>
     </div>
@@ -76,22 +80,37 @@
             </thead>
             <tbody>
             <tr th:each="drink: ${drinks}">
-                <td th:text="${drink.name}" />
-                <td th:text="${drink.brand}" />
-                <td th:text="${drink.price}" />
-                <td th:text="${drink.quantity}" />
-                <td th:text="${drink.typ}" />
+                <td th:text="${drink.name}"/>
+                <td th:text="${drink.brand}"/>
+                <td th:text="${drink.price}"/>
+                <td th:text="${drink.quantity}"/>
+                <td th:text="${drink.typ}"/>
                 <td><a class="btn btn-primary"
                        th:href="@{/drinks/{id}/modify(id=${drink.id})}">Modify</a>
             </tr>
             </tbody>
         </table>
+        <div class="container">
+        <ui  class="nav nav-pills nav-justified">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/add">Add new Drink</a>
+            </li>
+        </ui>
+        </div>
+        <div>
 
+        </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item" th:if="${hasPrev}"><a class="page-link" th:href="@{/drinks(page=${currentPage - 1})}">Previous</a></li>
-                <li class="page-item" th:classappend="${page == currentPage} ? 'active'" th:each="page: ${#numbers.sequence(minPage, maxPage)}"><a class="page-link" th:href="@{/drinks(page=${page})}" th:text="${page}"></a></li>
-                <li class="page-item" th:if="${hasNext}"><a class="page-link" th:href="@{/drinks(page=${currentPage + 1})}">Next</a></li>
+                <li class="page-item" th:if="${hasPrev}"><a class="page-link"
+                                                            th:href="@{/drinks(page=${currentPage - 1})}">Previous</a>
+                </li>
+                <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                    th:each="page: ${#numbers.sequence(minPage, maxPage)}"><a class="page-link"
+                                                                              th:href="@{/drinks(page=${page})}"
+                                                                              th:text="${page}"></a></li>
+                <li class="page-item" th:if="${hasNext}"><a class="page-link"
+                                                            th:href="@{/drinks(page=${currentPage + 1})}">Next</a></li>
             </ul>
         </nav>
     </div>

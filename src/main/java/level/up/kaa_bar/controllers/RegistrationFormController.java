@@ -28,6 +28,18 @@ public class RegistrationFormController {
         this.encoder = encoder;
     }
 
+    @GetMapping("/registration")
+    public String openRegistrationForm(
+            Model model,
+            @ModelAttribute AddUserForm form,
+            BindingResult bindingResult
+    ) {
+        model.addAttribute("form", form);
+        model.addAttribute("bindingResult", bindingResult);
+
+        return "registration";
+    }
+
     @PostMapping("/registration")
     @Transactional
     public String registration(
@@ -64,17 +76,7 @@ public class RegistrationFormController {
         return "/login";
     }
 
-    @GetMapping("/registration")
-    public String openRegistrationForm(
-            Model model,
-            @ModelAttribute AddUserForm form,
-            BindingResult bindingResult
-    ) {
-        model.addAttribute("form", form);
-        model.addAttribute("bindingResult", bindingResult);
 
-        return "registration";
-    }
 
     private User createUser(AddUserForm addUserForm) {
         User created;

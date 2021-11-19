@@ -25,4 +25,8 @@ public interface DrinksRepo extends JpaRepository<Drink, Integer> {
         save(newDrink);
         return newDrink;
     }
+    public default Drink saveDrink(Drink drink){
+        save(drink);
+        return drink;
+    }
 }
