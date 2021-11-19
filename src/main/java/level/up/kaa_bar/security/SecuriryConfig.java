@@ -29,7 +29,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .usernameParameter("name")
+                .usernameParameter("login")
                 .passwordParameter("password")
                 .permitAll();
 
