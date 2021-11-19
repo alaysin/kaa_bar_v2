@@ -78,7 +78,10 @@ public class RegistrationFormController {
 
     private User createUser(AddUserForm addUserForm) {
         User created;
-        created = userRepo.saveNewUserWithName(addUserForm.getLogin(), encoder.encode(addUserForm.getPassword()), addUserForm.getName(), addUserForm.getLast_name());
+        created = userRepo.saveNewUserWithName(addUserForm.getLogin(),
+                encoder.encode(addUserForm.getPassword()),
+                addUserForm.getName(),
+                addUserForm.getLast_name());
         return created;
     }
 }

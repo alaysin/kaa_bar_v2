@@ -1,4 +1,4 @@
-package level.up.kaa_bar.controllers;
+package level.up.kaa_bar.security;
 
 import level.up.kaa_bar.repo.UserRepo;
 import org.springframework.security.core.userdetails.User;

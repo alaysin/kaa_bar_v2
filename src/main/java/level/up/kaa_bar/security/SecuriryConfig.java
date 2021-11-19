@@ -1,4 +1,4 @@
-package level.up.kaa_bar.controllers;
+package level.up.kaa_bar.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
