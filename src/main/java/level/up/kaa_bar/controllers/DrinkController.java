@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.StringUtils.hasText;
@@ -91,6 +92,33 @@ public class DrinkController  {
 //        }
 //
 //
+
 //    }
+@GetMapping("/drinks/{id}/modify")
+public String modify(@PathVariable( value = "id") int id, Model model) {
+        Optional<Drink> drinkOption = drinksRepo.findById(id);
+        ArrayList<Drink> res = new ArrayList<>();
+        drinkOption.ifPresent(res::add);
+        model.addAttribute("drink", res);
+        return "modify";
+}
+@PostMapping("/drinks/{id}/modify")
+    public String modify(@PathVariable( value = "id") int id,
+                         @RequestParam String name,
+                         @RequestParam String brand,
+                         @RequestParam int price,
+                         @RequestParam int quantity,
+                         @RequestParam String typ){
+        Drink drink = drinksRepo.findById(id).orElseThrow();
+        drink.setName(name);
+        drink.setBrand(brand);
+        drink.setPrice(price);
+        drink.setQuantity(quantity);
+        drink.setTyp(typ);
+        drinksRepo.save(drink);
+
+        return "redirct:/";
+    }
+
 
 }

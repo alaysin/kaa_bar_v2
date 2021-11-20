@@ -63,7 +63,7 @@
                 <p>
                     <label>
                         Typ:
-                        <input type="text" name="typ" th:value="*{typ}">
+                        <input type="text" name="typ" th:text="*{typ}">
 
                         <span th:if="${bindingResult.hasFieldErrors('typ')}"
                               th:text="${bindingResult.getFieldErrors('typ')}"></span>
