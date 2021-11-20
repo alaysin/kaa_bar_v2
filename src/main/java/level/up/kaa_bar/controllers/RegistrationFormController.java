@@ -1,5 +1,6 @@
 package level.up.kaa_bar.controllers;
 
+import level.up.kaa_bar.dto.AddUserForm;
 import level.up.kaa_bar.model.User;
 import level.up.kaa_bar.repo.UserRepo;
 import org.hibernate.exception.ConstraintViolationException;

@@ -1,4 +1,4 @@
-package level.up.kaa_bar.controllers;
+package level.up.kaa_bar.dto;
 
 import lombok.Getter;
 import lombok.Setter;

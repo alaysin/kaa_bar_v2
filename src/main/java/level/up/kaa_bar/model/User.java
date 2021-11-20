@@ -1,6 +1,7 @@
 package level.up.kaa_bar.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table (name = "users")
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
@@ -72,7 +74,4 @@ public class User {
         this.isAdmin = false;
     }
 
-    public User() {
-
-    }
 }

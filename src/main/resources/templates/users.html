@@ -70,14 +70,12 @@
             <tr>
                 <th>ФИО</th>
                 <th>login</th>
-                <th>Статус</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item: ${users}">
                 <td th:text="${item.name} + ' ' + ${item.last_name}" />
                 <td th:text="${item.login}" />
-                <td th:text="${item.password}" />
             </tr>
             </tbody>
         </table>

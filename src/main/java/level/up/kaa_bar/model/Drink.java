@@ -1,6 +1,7 @@
 package level.up.kaa_bar.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,25 +9,26 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "drinks")
+@NoArgsConstructor
 public class Drink {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "drink_id_seq")
-    @SequenceGenerator(name = "drink_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "drinks_id_seq")
+    @SequenceGenerator(name = "drinks_id_seq", allocationSize = 1)
     @Getter
     private int id;
 
     @Column(nullable = false, updatable = false, length = 50)
-    @NotBlank
+//    @NotBlank
     @Getter @Setter
     private String name;
 
     @Column(nullable = false, updatable = false, length = 50)
-    @NotBlank
+//    @NotBlank
     @Getter @Setter
     private String brand;
 
     @Column(nullable = false, updatable = false, length = 50)
-    @NotBlank
+//    @NotBlank
     @Getter @Setter
     private int price;
 
@@ -35,7 +37,7 @@ public class Drink {
     private int quantity;
 
     @Column(nullable = false, updatable = false, length = 50)
-    @NotBlank
+//    @NotBlank
     @Getter @Setter
     private String typ;
 
@@ -47,7 +49,5 @@ public class Drink {
         this.typ = typ;
     }
 
-    public Drink() {
 
-    }
 }

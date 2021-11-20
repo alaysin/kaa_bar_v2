@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface DrinksRepo extends JpaRepository<Drink, Integer> {
 
+    @Query(name ="findByName")
+    public Drink findByName(String name);
+
     @Query(name ="findByBrand")
     public List<Drink> findByBrand(String brand);
 

@@ -1,7 +1,6 @@
 package level.up.kaa_bar.model;
 
-import level.up.kaa_bar.repo.DrinksRepo;
-import org.junit.Assert;
+import level.up.kaa_bar.repo.UserRepo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,31 +17,24 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Transactional
 @SpringBootTest
+@Transactional
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class DrinksRepoTest {
+public class UserRepoTest {
 
     @Autowired
-    private DrinksRepo drinksRepo;
+    private UserRepo userRepo;
 
     @Before
-    @Transactional
     public void configure() {
-        Drink drink = new Drink("DrinkTest1", "DrinkBrand1", 10, 10, "Beer");
-        Drink drink1 = new Drink("DrinkTest2", "DrinkBrand2", 10, 10, "Beer");
-
-        drinksRepo.save(drink);
-        drinksRepo.save(drink1);
+        User newUser= new User("login", "password", "name", "last_name");
+        userRepo.save(newUser);
     }
-
     @Test
-    public void testFindingByDrinkName() {
-        assertNull(drinksRepo.findByName("DrinkTest"));
-        Drink found = drinksRepo.findByName("DrinkTest1");
+    public void findByLogin() {
+        assertNull(userRepo.findUserByLogin("non existing user"));
+        User found = userRepo.findUserByLogin("login");
         assertNotNull(found);
-        assertEquals("DrinkTest1", found.getName());
-
+        assertEquals("login", found.getLogin());
     }
-
 }

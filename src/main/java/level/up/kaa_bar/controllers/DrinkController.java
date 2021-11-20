@@ -108,7 +108,9 @@ public String modify(@PathVariable( value = "id") int id, Model model) {
                          @RequestParam String brand,
                          @RequestParam int price,
                          @RequestParam int quantity,
-                         @RequestParam String typ){
+                         @RequestParam String typ
+        , Model model
+){
         Drink drink = drinksRepo.findById(id).orElseThrow();
         drink.setName(name);
         drink.setBrand(brand);

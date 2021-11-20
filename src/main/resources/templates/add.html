@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <h3>New user Registration</h3>
+            <h3>Add new Drink form!</h3>
         </div>
         <div class="col"></div>
     </div>
@@ -20,11 +20,11 @@
         <div class="col">
             <form action="/add" method="post" th:object="${form}">
 
-                <p>
-                    <label>
-                        Add new Drink form!
-                    </label>
-                </p>
+<!--                <p>-->
+<!--                    <label>-->
+<!--                        Add new Drink form!-->
+<!--                    </label>-->
+<!--                </p>-->
                 <p>
                     <label>
                         Drink name:
@@ -69,6 +69,11 @@
                               th:text="${bindingResult.getFieldErrors('typ')}"></span>
                     </label>
                 </p>
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}"
+                />
 
                 <button type="submit" class="btn btn-primary">Add new Drink</button>
                 <a class="btn btn-secondary" aria-current="page" href="/" role="button">Return</a>

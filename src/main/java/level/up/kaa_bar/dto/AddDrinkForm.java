@@ -1,34 +1,31 @@
-package level.up.kaa_bar.controllers;
+package level.up.kaa_bar.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotBlank;
+
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 
 public class AddDrinkForm {
 
-    @NotBlank
     @Getter @Setter
     @Length(max = 50)
     private String name;
 
-    @NotBlank
     @Getter @Setter
     @Length(max = 50)
     private String brand;
 
-    @NotBlank
     @Getter @Setter
-    @Length(max = 50)
+    @PositiveOrZero
     private int price;
 
-    @NotBlank
     @Getter @Setter
-    @Length(max = 50)
+    @PositiveOrZero
     private int quantity;
 
-    @NotBlank
     @Getter @Setter
     @Length(max = 50)
     private String typ;
@@ -36,11 +33,11 @@ public class AddDrinkForm {
     public AddDrinkForm() {
     }
 
-    public AddDrinkForm(@NotBlank @Length(max = 50) String name,
-                        @NotBlank @Length(max = 50) String brand,
-                        @NotBlank @Length(max = 50) int price,
-                        @NotBlank @Length(max = 50) int quantity,
-                        @NotBlank @Length(max = 50) String typ) {
+    public AddDrinkForm(@Length(max = 50) String name,
+                        @Length(max = 50) String brand,
+                        @PositiveOrZero int price,
+                        @PositiveOrZero int quantity,
+                        @Length(max = 50) String typ) {
         this.name = name;
         this.brand = brand;
         this.price = price;

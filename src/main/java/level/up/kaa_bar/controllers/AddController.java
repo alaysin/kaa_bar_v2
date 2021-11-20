@@ -1,5 +1,6 @@
 package level.up.kaa_bar.controllers;
 
+import level.up.kaa_bar.dto.AddDrinkForm;
 import level.up.kaa_bar.model.Drink;
 import level.up.kaa_bar.repo.DrinksRepo;
 import org.hibernate.exception.ConstraintViolationException;
@@ -47,8 +48,12 @@ public class AddController {
         Drink added;
 
         try {
-            added = drinksRepo.saveNewDrink(form.getName(), form.getBrand()
-                    , form.getPrice(), form.getQuantity(), form.getTyp());
+            added = drinksRepo.saveNewDrink(
+                    form.getName(),
+                    form.getBrand(),
+                    form.getPrice(),
+                    form.getQuantity(),
+                    form.getTyp());
         } catch (ConstraintViolationException constraintViolationException) {
             bindingResult.addError(new FieldError("form",
                     "name", "name is not correct"));
