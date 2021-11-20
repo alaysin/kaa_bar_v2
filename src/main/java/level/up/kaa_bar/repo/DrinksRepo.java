@@ -14,14 +14,14 @@ public interface DrinksRepo extends JpaRepository<Drink, Integer> {
     @Query(name ="findByBrand")
     public List<Drink> findByBrand(String brand);
 
-    @Query(name = "existsById")
-    public List<Drink> existsById(int id);
+//    @Query(name = "existsById")
+//    public boolean existsById(int id);
 
     @Query(name ="findByBrandAndAndTyp")
-    public List<Drink> findByBrandAndAndTyp(String brand, String typ);
+    public Drink findByBrandAndAndTyp(String brand, String typ);
 
     @Query(name ="findByPrice")
-    public List<Drink> findByPrice(double price);
+    public List<Drink> findByPrice(int price);
 
     public default Drink saveNewDrink(String drinkName, String brand, int price, int quantity, String typ) {
         Drink newDrink = new Drink(drinkName, brand, price, quantity, typ);

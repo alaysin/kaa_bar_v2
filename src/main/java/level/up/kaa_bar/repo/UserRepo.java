@@ -18,6 +18,9 @@ public interface UserRepo extends JpaRepository<User, Integer>, JpaSpecification
     @Query(name = "findByIsAdmin")
     public List<User> findByIsAdmin(boolean isAdmin);
 
+    @Query(name = "findByToDelete")
+    public List<User> findByToDelete(boolean toDelete);
+
     public default User saveNewUserWithName(String login, String password, String name, String last_name) {
         User newUser = new User(login, password, name, last_name);
         save(newUser);
