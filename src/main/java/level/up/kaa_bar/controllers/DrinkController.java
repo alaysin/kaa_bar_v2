@@ -7,6 +7,7 @@ import level.up.kaa_bar.utils.PaginationParams;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,8 @@ public class DrinkController  {
     @GetMapping("")
     public String index(Model model,
                         @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                        @RequestParam(value = "q", required = false, defaultValue = "") String query
+                        @RequestParam(value = "q", required = false, defaultValue = "") String query,
+                        Authentication authentication
 //                      ,@RequestParam(defaultValue = "10") int count
     ) {
         PageRequest pageRequest = PageRequest.of(page - 1, 10);
@@ -46,6 +48,7 @@ public class DrinkController  {
         model.addAttribute("query", query);
         model.addAttribute("drinks", drinks.stream().collect(Collectors.toList()));
         model.addAttribute("title", "Lets drink!");
+        model.addAttribute("isLoggedIn", authentication != null);
 
         PaginationParams<Drink> paginationParams = new PaginationParams<>(drinks);
         model.addAllAttributes(paginationParams.getParams(page));

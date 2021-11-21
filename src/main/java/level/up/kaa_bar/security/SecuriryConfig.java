@@ -19,10 +19,11 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
         http.csrf();
 
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/registration").permitAll()
+                .antMatchers( "/login", "/registration").permitAll()
                 .antMatchers(HttpMethod.GET, "/**/*.js", "/**/*.css").permitAll()
                 .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("USER")
+                .antMatchers("/**").authenticated()
                 .anyRequest().denyAll();
 
 
