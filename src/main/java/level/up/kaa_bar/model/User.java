@@ -10,22 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "users")
+@Table (uniqueConstraints={@UniqueConstraint(columnNames={"login"})}, name = "users")
 @NoArgsConstructor
 public class User {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
     @SequenceGenerator(name = "users_id_seq", allocationSize = 1)
     @Getter
     private int id;
 
-    @Column(unique = true, length = 100)
+    @Column(name = "login", unique = true, length = 30)
     @NotBlank
     @Getter
     @Setter
     private String login;
 
-    @Column(unique = false, length = 100)
+    @Column(name = "password", unique = false, length = 100)
     @NotBlank
     @Getter
     @Setter
@@ -36,13 +37,13 @@ public class User {
     @Setter
     private boolean isAdmin;
 
-    @Column(unique = false, length = 100)
+    @Column(name = "name", unique = false, length = 100)
     @NotBlank
     @Getter
     @Setter
     private String name;
 
-    @Column(unique = false, length = 100)
+    @Column(name = "last_name", unique = false, length = 100)
     @NotBlank
     @Getter
     @Setter

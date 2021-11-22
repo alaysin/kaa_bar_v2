@@ -23,7 +23,6 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/**/*.js", "/**/*.css").permitAll()
                 .antMatchers("/**").hasRole("ADMIN")
                 .antMatchers("/**").hasRole("USER")
-                .antMatchers("/**").authenticated()
                 .anyRequest().denyAll();
 
 

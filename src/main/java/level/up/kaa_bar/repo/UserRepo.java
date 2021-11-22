@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
+public interface UserRepo extends JpaRepository<User, Integer>{
+        //, JpaSpecificationExecutor<User> {
 
     User findUserByLogin(String login);
 
@@ -21,7 +22,7 @@ public interface UserRepo extends JpaRepository<User, Integer>, JpaSpecification
     @Query(name = "findByToDelete")
     public List<User> findByToDelete(boolean toDelete);
 
-    public default User saveNewUserWithName(String login, String password, String name, String last_name) {
+    public default User saveNewUser(String login, String password, String name, String last_name) {
         User newUser = new User(login, password, name, last_name);
         save(newUser);
         return newUser;

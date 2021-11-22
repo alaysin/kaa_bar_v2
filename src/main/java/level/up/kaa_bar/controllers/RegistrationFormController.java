@@ -3,8 +3,10 @@ package level.up.kaa_bar.controllers;
 import level.up.kaa_bar.dto.AddUserForm;
 import level.up.kaa_bar.model.User;
 import level.up.kaa_bar.repo.UserRepo;
+import lombok.AllArgsConstructor;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +27,8 @@ public class RegistrationFormController {
 
     private final PasswordEncoder encoder;
 
+    private final String REG = "registration";
+
     public RegistrationFormController(PasswordEncoder encoder) {
         this.encoder = encoder;
     }
@@ -38,50 +42,49 @@ public class RegistrationFormController {
         model.addAttribute("form", form);
         model.addAttribute("bindingResult", bindingResult);
 
-        return "registration";
+        return REG;
     }
 
     @PostMapping("/registration")
     @Transactional
     public String registration(
             Model model,
-            @Valid @ModelAttribute("form") AddUserForm form,
-//            @ModelAttribute("user-session") UserSession session,
+            @ModelAttribute("form")
+            @Valid AddUserForm form,
             BindingResult bindingResult
     ) {
-        model.addAttribute("form", form);
-        model.addAttribute("bindingResult", bindingResult);
+//        model.addAttribute("form", form);
+//        model.addAttribute("bindingResult", bindingResult);
 
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return REG;
         }
 
         User registered;
 
         try {
             registered = createUser(form);
-            //usersDAO.saveNewUserWithName(form.getUserLogin(), form.getPassword(), form.getUserName());
-        } catch (ConstraintViolationException constraintViolationException) {
-            bindingResult.addError(new FieldError("form",
-                    "login", "Login is not available"
-            ));
-            return "registration";
+
+        } catch (Exception e) {
+            bindingResult.addError(
+                    new FieldError(
+                            "form",
+                            "login",
+                            "Login is not available"
+                    ));
+            return REG;
         }
         model.addAttribute("login", registered.getLogin());
         model.addAttribute("password", registered.getPassword());
-        model.addAttribute("isAdmin", registered.isAdmin());
-        model.addAttribute("name", registered.getName());
-        model.addAttribute("last_name", registered.getLast_name());
-        model.addAttribute("toDelete", registered.isToDelete());
         return "/login";
     }
 
 
-
     private User createUser(AddUserForm addUserForm) {
         User created;
-        created = userRepo.saveNewUserWithName(addUserForm.getLogin(),
+        created = userRepo.saveNewUser(
+                addUserForm.getLogin(),
                 encoder.encode(addUserForm.getPassword()),
                 addUserForm.getName(),
                 addUserForm.getLast_name());
