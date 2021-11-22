@@ -69,7 +69,7 @@ public class UserRepoTest {
     @Test
     public void testSaveNewUserWithName() {
         User testUser = new User("login", "password", "name", "last_name");
-        User added = userRepo.saveNewUserWithName("login", "password", "name", "last_name");
+        User added = userRepo.saveNewUser("login", "password", "name", "last_name");
         assertTrue(userRepo.findById(added.getId()).isPresent());
 
     }

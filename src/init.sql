@@ -44,3 +44,26 @@ create sequence users_id_seq;
 
 alter sequence users_id_seq owner to postgres;
 
+create table brand
+(
+    id         integer,
+    brand_name varchar
+);
+
+alter table brand
+    owner to postgres;
+
+INSERT INTO brand
+(id, brand_name) VALUES
+(1, 'Corona Extra'),
+(2, 'Brahma'),
+(3, 'Harbin'),
+(4, 'Heineken'),
+(5, 'Tsingtao'),
+(6, 'Budweiser'),
+(7, 'Bud'),
+(8, 'Guinnes'),
+(9, 'Newcastle'),
+(10, 'Spaten'),
+(11, 'St. Peters'),
+(12, 'AF Brew');

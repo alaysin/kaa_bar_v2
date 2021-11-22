@@ -17,26 +17,26 @@ public class Drink {
     @Getter
     private int id;
 
-    @Column(nullable = false, updatable = false, length = 50)
+    @Column(nullable = false, length = 50)
 //    @NotBlank
     @Getter @Setter
     private String name;
 
-    @Column(nullable = false, updatable = false, length = 50)
+    @Column(nullable = false, length = 50)
 //    @NotBlank
     @Getter @Setter
     private String brand;
 
-    @Column(nullable = false, updatable = false, length = 50)
+    @Column(nullable = false, length = 50)
 //    @NotBlank
     @Getter @Setter
     private int price;
 
-    @Column(nullable = false, updatable = true, length = 50)
+    @Column(nullable = false, length = 50)
     @Getter @Setter
     private int quantity;
 
-    @Column(nullable = false, updatable = false, length = 50)
+    @Column(nullable = false, length = 50)
 //    @NotBlank
     @Getter @Setter
     private String typ;

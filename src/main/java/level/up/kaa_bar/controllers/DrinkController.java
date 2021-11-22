@@ -1,129 +1,93 @@
 package level.up.kaa_bar.controllers;
 
+import level.up.kaa_bar.dto.AddDrinkForm;
 import level.up.kaa_bar.model.Drink;
 import level.up.kaa_bar.repo.DrinksRepo;
 import level.up.kaa_bar.repo.DrinksRepoPaging;
 import level.up.kaa_bar.utils.PaginationParams;
 import lombok.AllArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.StringUtils.hasText;
 
 @Controller
-@RequestMapping({"/drinks", ""})
 @AllArgsConstructor
 public class DrinkController  {
-    private DrinksRepoPaging drinksRepoPaging;
+
+    final static String DRINKINFO = "drinkinfo";
     private DrinksRepo drinksRepo;
 
-    @GetMapping("")
-    public String index(Model model,
-                        @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                        @RequestParam(value = "q", required = false, defaultValue = "") String query,
-                        Authentication authentication
-//                      ,@RequestParam(defaultValue = "10") int count
-    ) {
-        PageRequest pageRequest = PageRequest.of(page - 1, 10);
-
-        String queryString = query.trim();
-
-        Page<Drink> drinks = hasText(queryString) ?
-                drinksRepoPaging.findContact(queryString, pageRequest)
-                : drinksRepoPaging.findAll(pageRequest);
-
-//        model.addAttribute("drinks", drinksRepo.findAll()
-//        .stream().collect(Collectors.toList()));
-        model.addAttribute("query", query);
-        model.addAttribute("drinks", drinks.stream().collect(Collectors.toList()));
-        model.addAttribute("title", "Lets drink!");
-        model.addAttribute("isLoggedIn", authentication != null);
-
-        PaginationParams<Drink> paginationParams = new PaginationParams<>(drinks);
-        model.addAllAttributes(paginationParams.getParams(page));
-
-        return "drinks";
+    @GetMapping("/addDrink")
+    public String add(
+            Model model,
+            @ModelAttribute("form") AddDrinkForm form
+                ){
+        model.addAttribute("isAdded", false);
+        return DRINKINFO;
     }
 
-    @PostMapping
+
+    @GetMapping("/drinks/modify/{id}")
+    public String modify(@PathVariable("id") int id,
+                         Model model) {
+        Drink drink = drinksRepo.findById(id).orElseThrow(NoSuchElementException::new);
+        AddDrinkForm form = new AddDrinkForm(drink.getName(), drink.getBrand(), drink.getPrice(),
+                drink.getQuantity(), drink.getTyp());
+        form.setId(id);
+        model.addAttribute("isAdded", false);
+        model.addAttribute("form", form);
+
+        return DRINKINFO;
+    }
+
+    @PostMapping("/save")
     @Transactional
-    public @ResponseBody
-    String create(@RequestParam("name") String name,
-                  @RequestParam("brand") String brand,
-                  @RequestParam("price") int price,
-                  @RequestParam("quantity") int quantity,
-                  @RequestParam("typ") String typ
-    ) {
-        Drink drink = new Drink();
-        //Drink drink = new Drink();
-        drink.setName(name);
-        drink.setBrand(brand);
-        drink.setPrice(price);
-        drink.setQuantity(quantity);
-        drink.setTyp(typ);
+    public String save(Model model,
+                       @Valid @ModelAttribute("form")AddDrinkForm form,
+                       @RequestParam("id") int id,
+                       BindingResult bindingResult
+    ){
+        if (bindingResult.hasErrors()) {
+            return DRINKINFO;
+        }
+        Drink drink;
+        if (id==0) {
+            drink = new Drink(
+                    form.getName(),
+                    form.getBrand(),
+                    form.getPrice(),
+                    form.getQuantity(),
+                    form.getTyp());
 
-        drinksRepoPaging.save(drink);
+        } else {
+            drink = drinksRepo.findById(id).orElseThrow(NoSuchElementException::new);
+            drink.setName(form.getName());
+            drink.setBrand(form.getBrand());
+            drink.setPrice(form.getPrice());
+            drink.setQuantity(form.getQuantity());
+            drink.setTyp(form.getTyp());
 
-        return "OK";
-    }
 
-
-//    @GetMapping("/drinks/{id}/modify")
-//    public ModelAndView modify(@PathVariable(value = "id") int id, Model model) {
-//        Option<Drink> drink = drinksRepo.findById(id);
-//        ArrayList<Drink> res = new ArrayList<>();
-//
-//
-//        if (drinksRepo.findById(id).isPresent()) {
-//            Drink drinks = drinksRepo.findById(id).get();
-//            drinks.se();
-//            petsDAO.save(pets);
-//            return new ModelAndView("redirect:/");
-//        } else {
-//            return new ModelAndView("redirect:/error");
-//        }
-//
-//
-
-//    }
-@GetMapping("/drinks/{id}/modify")
-public String modify(@PathVariable( value = "id") int id, Model model) {
-        Optional<Drink> drinkOption = drinksRepo.findById(id);
-        ArrayList<Drink> res = new ArrayList<>();
-        drinkOption.ifPresent(res::add);
-        model.addAttribute("drink", res);
-        return "modify";
-}
-@PostMapping("/drinks/{id}/modify")
-    public String modify(@PathVariable( value = "id") int id,
-                         @RequestParam String name,
-                         @RequestParam String brand,
-                         @RequestParam int price,
-                         @RequestParam int quantity,
-                         @RequestParam String typ
-        , Model model
-){
-        Drink drink = drinksRepo.findById(id).orElseThrow();
-        drink.setName(name);
-        drink.setBrand(brand);
-        drink.setPrice(price);
-        drink.setQuantity(quantity);
-        drink.setTyp(typ);
+        }
         drinksRepo.save(drink);
 
-        return "redirct:/";
-    }
+        model.addAttribute("isAdded", true);
 
+        return DRINKINFO;
+    }
 
 }

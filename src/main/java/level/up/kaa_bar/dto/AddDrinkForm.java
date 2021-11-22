@@ -4,11 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Id;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 
 public class AddDrinkForm {
+
+    @Getter @Setter
+    private int id;
 
     @Getter @Setter
     @Length(max = 50)
