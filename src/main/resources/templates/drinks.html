@@ -64,20 +64,23 @@
                 <td th:text="${drink.typ}"/>
                 <td><a class="btn btn-primary"
                        th:href="@{/drinks/modify/{id}(id=${drink.id})}">Modify</a>
-                    <a class="btn btn-danger"
+                    <a class="btn btn-danger" type="submit"
                        th:href="@{/drinks/delete/{id}(id=${drink.id})}">Delete</a>
             </tr>
             </tbody>
         </table>
         <div class="container">
-        <ui  class="nav nav-pills nav-justified">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/addDrink">Add new Drink</a>
-            </li>
-        </ui>
+            <ui class="nav nav-pills nav-justified">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/addDrink">Add new Drink</a>
+                </li>
+            </ui>
         </div>
         <div>
-
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}"
+            />
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
